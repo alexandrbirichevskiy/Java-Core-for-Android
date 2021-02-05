@@ -6,6 +6,7 @@ public class Cat extends Animal {
 
     public Cat(String name) {
         super(name);
+        numberCats ++;
     }
 
     protected void run(double obstacleLength) {
@@ -15,4 +16,5 @@ public class Cat extends Animal {
     protected void swim ( double obstacleLength){
         System.out.println("Я не умею плавать, я же кот!");
     }
+
 }

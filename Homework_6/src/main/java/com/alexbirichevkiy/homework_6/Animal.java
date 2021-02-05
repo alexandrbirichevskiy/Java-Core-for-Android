@@ -1,10 +1,11 @@
 package com.alexbirichevkiy.homework_6;
 
-public class Animal {
+public class Animal extends Main{
     private String name;
 
     public Animal(String name) {
         this.name = name;
+        super.numberAnimals++;
     }
 
     protected void run(double obstacleLength, int max, String form) {
