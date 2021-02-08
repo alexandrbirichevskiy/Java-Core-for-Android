@@ -11,15 +11,25 @@ public class Plate {
         System.out.println("plate: "+ food);
     }
 
-    public int getFood() {
-        return food;
+    public boolean decreaseFood(int n) {
+        if (food - n < 0) {
+            return false;
+        }
+        else {
+            food = food - n;
+            return true;
+        }
     }
 
-    public void decreaseFood(int n) {
-        food = food - n;
+    public void addFood (int additionalFood) {
+        food+=additionalFood;
     }
 
     public void setFood(int food) {
         this.food = food;
+    }
+
+    public int getFood() {
+        return food;
     }
 }
