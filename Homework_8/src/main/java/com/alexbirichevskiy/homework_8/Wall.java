@@ -1,18 +1,20 @@
 package com.alexbirichevskiy.homework_8;
 
-public class Wall {
+public class Wall implements Obstacle{
     private double lenghWall;
 
     public Wall(double lenghWall) {
         this.lenghWall = lenghWall;
     }
 
-    public void JumpAlongTheWall(Actble person){
+    public boolean overcomeAnObstacle(Actble person){
         if (lenghWall <= person.jump()) {
-            System.out.println("Препядствие пройдено");
+            System.out.println("Стена преодолена");
+            return true;
         }
         else {
-            System.out.println("Препядствие не пройдено");
+            System.out.println("Стена не преодолена");
+            return false;
         }
     }
 }

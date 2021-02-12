@@ -1,18 +1,20 @@
 package com.alexbirichevskiy.homework_8;
 
-public class RunningTrack {
+public class RunningTrack implements Obstacle{
     private double lenghRunningTrack;
 
     public RunningTrack(double lenghRunningTrack) {
         this.lenghRunningTrack = lenghRunningTrack;
     }
 
-    public void RunAlongTheTrack(Actble person){
+    public boolean overcomeAnObstacle(Actble person){
         if (lenghRunningTrack <= person.run()) {
-            System.out.println("Препядствие пройдено");
+            System.out.println("Беговая дорожка преодолена");
+            return true;
         }
         else {
-            System.out.println("Препядствие не пройдено");
+            System.out.println("Беговая дорожка не преодолена");
+            return false;
         }
     }
 }
