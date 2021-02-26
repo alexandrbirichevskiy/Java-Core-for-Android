@@ -1,45 +1,82 @@
 package com.alexbirichevskiy.homework_11.task_3;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
-public class Box <T extends Fruit>{
-    List <T> box = new ArrayList <>();
+public class Box <T extends Fruit> {
+    List<T> box = new ArrayList<>();
+    private int numberFruits;
+    private float weightFruits;
 
     public List<T> putInBox(T fruit) {
-                if (box.size() != 0 && !box.get(0).getClass().getName().equals(fruit.getClass().getName())){
-                    System.out.println("Мы не можем положить это в коробку, там уже лежит " +
-                            box.get(0).getClass().getSimpleName());
-                }
-                else {
-                    box.add(fruit);
-                }
+        if (box.size() != 0 && !box.get(0).getClass().getName().equals(fruit.getClass().getName())) {
+            System.out.println("Мы не можем положить это в коробку, там уже лежит " +
+                    box.get(0).getClass().getSimpleName());
+        } else {
+            box.add(fruit);
+            numberFruits += fruit.getNum();
+            weightFruits = fruit.getWeightFruit();
+        }
         return box;
     }
 
-    public float getWeight(){
-        int numberFruits = 0;
-        float weightFruits = 0.0f;
-        if (box.size() == 0) {
-            System.out.println("Коробка пустая");
-        }
-        else {
-            weightFruits = box.get(0).getWeightFruit();
-            Iterator<T> iter = box.iterator();
-            while (iter.hasNext()) {
-                numberFruits += iter.next().getNum();
-            }
-        }
-        float weightBox = numberFruits*weightFruits;
-        System.out.println("Коробка весит " + weightBox);
-        return weightBox;
+    public float getWeight() {
+        return numberFruits * weightFruits;
     }
 
-    public void infoBox() {
-        Iterator <T> iter = box.iterator();
-        while (iter.hasNext()){
-            System.out.println(iter.next().getNum());
+    public boolean compare(Box nBox) {
+        return numberFruits * weightFruits == nBox.getWeight();
+    }
+
+    public void clearBox() {
+        box.clear();
+        numberFruits = 0;
+        weightFruits = 0;
+    }
+
+    public void setBox(List<T> box) {
+        this.box = box;
+    }
+
+    public List<T> getBox() {
+        return box;
+    }
+
+    public int getNumberFruits() {
+        return numberFruits;
+    }
+
+    public float getWeightFruits() {
+        return weightFruits;
+    }
+
+    public void setNumberFruits(int numberFruits) {
+        this.numberFruits = numberFruits;
+    }
+
+    public void setWeightFruits(float weightFruits) {
+        this.weightFruits = weightFruits;
+    }
+
+    public void pourOver(Box inBox) {
+        if (numberFruits * weightFruits == 0.0) {
+            System.out.println("Коробка пустая, пересывать нечего");
+            return;
+        }
+        if (inBox.getBox().size() == 0) {
+            inBox.setNumberFruits(inBox.getNumberFruits()+ numberFruits);
+            inBox.setWeightFruits(weightFruits);
+            inBox.setBox(box);
+            clearBox();
+            return;
+        }
+        if (inBox.getBox().size() != 0 && !box.get(0).getClass().getName().equals(inBox.getBox().getClass().getName())){
+            inBox.setNumberFruits(inBox.getNumberFruits()+ numberFruits);
+            inBox.setWeightFruits(weightFruits);
+            inBox.getBox().addAll(box);
+        }
+        else {
+            System.out.println("Мы не можем пересыпать");
         }
     }
 }
