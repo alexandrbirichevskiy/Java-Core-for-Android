@@ -30,10 +30,19 @@ public class Main {
         System.out.println(box1.compare(box2));
 //      Дальше пересыпаем фрукты из коробки 1 в коробку 3
         box1.pourOver(box3);
-//        System.out.println(box1.getBox());
-//        System.out.println(box3.getBox());
+//      Смотрим, удалось ли пересыпать
         System.out.println(box3.getWeight());
+//      Видим, что коробка 1 стала пустой
+        System.out.println(box1.getWeight());
+//      Тут у нас не получается пересыпать апельсины к яблокам
         box2.pourOver(box3);
-        System.out.println(box3.getWeight());
+//      Создаем 4 апельсина
+        Orange orange1 = new Orange(1);
+//      Кладем 4 апельсина в первую коробку, ведь уже пустая
+        box1.putInBox(orange1);
+//      Перекладываем из второй коробки в первую
+        box2.pourOver(box1);
+//      Все успешно пересыпалось. Ведь и там и там жили апельсины
+        System.out.println(box1.getWeight());
     }
 }

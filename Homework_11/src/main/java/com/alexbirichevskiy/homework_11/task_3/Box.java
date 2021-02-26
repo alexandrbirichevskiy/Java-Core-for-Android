@@ -29,7 +29,7 @@ public class Box <T extends Fruit> {
     }
 
     public void clearBox() {
-        box.clear();
+        box = new ArrayList<>();
         numberFruits = 0;
         weightFruits = 0;
     }
@@ -70,7 +70,7 @@ public class Box <T extends Fruit> {
             clearBox();
             return;
         }
-        if (inBox.getBox().size() != 0 && !box.get(0).getClass().getName().equals(inBox.getBox().getClass().getName())){
+        if (inBox.getBox().size() != 0 && box.get(0).getClass().getName().equals(inBox.getBox().get(0).getClass().getName())){
             inBox.setNumberFruits(inBox.getNumberFruits()+ numberFruits);
             inBox.setWeightFruits(weightFruits);
             inBox.getBox().addAll(box);
