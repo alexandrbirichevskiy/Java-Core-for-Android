@@ -1,7 +1,6 @@
 package com.alexbirichevskiy.homework_11.task_2;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class ArrayToList <T> {
@@ -12,7 +11,7 @@ public class ArrayToList <T> {
     }
 
     public List<T> arrayToArrayList() {
-        List <T> list = new ArrayList();
+        List <T> list = new ArrayList<>();
         for (int i = 0; i < arr.length; i++) {
             list.add(arr[i]);
         }
