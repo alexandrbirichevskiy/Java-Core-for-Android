@@ -20,6 +20,7 @@ public class Main {
             arr[i] = (float) (arr[i] * Math.sin(0.2f + i / 5) * Math.cos(0.2f + i / 5) * Math.cos(0.4f + i / 2));
         }
         System.currentTimeMillis();
+        System.out.print("Первый метод ");
         System.out.println(System.currentTimeMillis() - a);
     }
 
@@ -55,6 +56,7 @@ public class Main {
         System.arraycopy(arr1, 0, arr, 0, h);
         System.arraycopy(arr2, 0, arr, h, h);
         System.currentTimeMillis();
+        System.out.print("Второй метод ");
         System.out.println(System.currentTimeMillis() - a);
     }
 }
