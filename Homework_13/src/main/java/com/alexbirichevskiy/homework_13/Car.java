@@ -4,7 +4,7 @@ import java.util.concurrent.CyclicBarrier;
 
 public class Car implements Runnable {
     private static int CARS_COUNT;
-    private static CyclicBarrier cb;
+    private CyclicBarrier cb;
     private Race race;
     private int speed;
     private String name;
