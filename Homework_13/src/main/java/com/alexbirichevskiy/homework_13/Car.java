@@ -7,6 +7,7 @@ import java.util.concurrent.locks.ReadWriteLock;
 public class Car implements Runnable {
     private static int CARS_COUNT;
     private CyclicBarrier cb;
+    private CyclicBarrier cbr;
     private ReadWriteLock readWriteLock;
     private Race race;
     private int speed;
@@ -21,12 +22,13 @@ public class Car implements Runnable {
         return speed;
     }
 
-    public Car(Race race, int speed, CyclicBarrier cb, ReadWriteLock readWriteLock) {
+    public Car(Race race, int speed, CyclicBarrier cb, ReadWriteLock readWriteLock, CyclicBarrier cbr) {
         this.race = race;
         this.speed = speed;
         CARS_COUNT++;
         this.name = "Участник #" + CARS_COUNT;
         this.cb = cb;
+        this.cbr = cbr;
         this.readWriteLock = readWriteLock;
     }
 
@@ -44,7 +46,21 @@ public class Car implements Runnable {
         for (int i = 0; i < race.getStages().size(); i++) {
             race.getStages().get(i).go(this);
         }
-        readWriteLock.writeLock().lock();
-        System.out.println(this.name + " - WIN");
+
+        if (readWriteLock.writeLock().tryLock()){
+            readWriteLock.writeLock().lock();
+            System.out.println(this.name + " - WIN");
+            Thread.interrupted();
+
+        }
+        else {
+            try {
+                cbr.await();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (BrokenBarrierException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

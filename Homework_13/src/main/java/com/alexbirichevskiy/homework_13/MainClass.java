@@ -8,6 +8,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 public class MainClass {
     public static final int CARS_COUNT = 5;
     public static CyclicBarrier cb = new CyclicBarrier(CARS_COUNT, new StartRaceMessage());
+    public static CyclicBarrier cbr = new CyclicBarrier(CARS_COUNT-1, new EndRaceMessage());
     public static Semaphore sem = new Semaphore(CARS_COUNT / 2);
     public static ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
 
@@ -18,12 +19,11 @@ public class MainClass {
         Car[] cars = new Car[CARS_COUNT];
 
         for (int i = 0; i < cars.length; i++) {
-            cars[i] = new Car(race, 20 + (int) (Math.random() * 10), cb, readWriteLock);
+            cars[i] = new Car(race, 20 + (int) (Math.random() * 10), cb, readWriteLock, cbr);
         }
 
         for (int i = 0; i < cars.length; i++) {
             new Thread(cars[i]).start();
         }
-//        System.out.println("ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> Гонка закончилась!!!");
     }
 }
