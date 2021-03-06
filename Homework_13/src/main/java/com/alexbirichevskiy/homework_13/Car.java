@@ -1,10 +1,13 @@
 package com.alexbirichevskiy.homework_13;
 
+import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.locks.ReadWriteLock;
 
 public class Car implements Runnable {
     private static int CARS_COUNT;
     private CyclicBarrier cb;
+    private ReadWriteLock readWriteLock;
     private Race race;
     private int speed;
     private String name;
@@ -18,12 +21,13 @@ public class Car implements Runnable {
         return speed;
     }
 
-    public Car(Race race, int speed, CyclicBarrier cb) {
+    public Car(Race race, int speed, CyclicBarrier cb, ReadWriteLock readWriteLock) {
         this.race = race;
         this.speed = speed;
         CARS_COUNT++;
         this.name = "Участник #" + CARS_COUNT;
         this.cb = cb;
+        this.readWriteLock = readWriteLock;
     }
 
     @Override
@@ -40,5 +44,7 @@ public class Car implements Runnable {
         for (int i = 0; i < race.getStages().size(); i++) {
             race.getStages().get(i).go(this);
         }
+        readWriteLock.writeLock().lock();
+        System.out.println(this.name + " - WIN");
     }
 }
