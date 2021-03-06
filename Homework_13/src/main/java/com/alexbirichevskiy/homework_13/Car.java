@@ -62,5 +62,6 @@ public class Car implements Runnable {
                 e.printStackTrace();
             }
         }
+        Thread.interrupted();
     }
 }
